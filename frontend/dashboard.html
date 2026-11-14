@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Digital Document Verification</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">Logged In User Portal</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html" class="active" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="my-verifications.html" data-i18n="nav_my_verifications">My Verifications</a></li>
+        <li><a href="how-it-works.html" data-i18n="nav_how_it_works">How It Works</a></li>
+        <li id="nav-auth-container"></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <span><strong data-i18n="disclaimer_label">DISCLAIMER:</strong> <span data-i18n="disclaimer_text">This is a preliminary document-readiness check. It does not confirm legal authenticity or official government approval.</span></span>
+  </div>
+
+  <!-- Dashboard Container -->
+  <main class="main-container">
+    <section class="hero-section">
+      <h1 class="hero-title" data-i18n="hero_title">Prepare Your Documents Before You Apply</h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
+        Select a government service, upload the required documents, and check whether your documents are clear and suitable for application.
+      </p>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="services.html" class="btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;" data-i18n="btn_select_service">
+          Start Document Verification &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- 3-Step Process -->
+    <h2 style="font-size: 1.6rem; margin-bottom: 1.5rem;" data-i18n="steps_heading">How Document Readiness Verification Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-title" data-i18n="step1_title">1. Select Service</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="step1_desc">
+          Choose the government service you intend to apply for from our catalog.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-title" data-i18n="step2_title">2. Upload Documents</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="step2_desc">
+          Upload your Aadhaar, Income Proof, Address Proof, or Marksheets in PDF or image format.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-title" data-i18n="step3_title">3. Verify & Get Report</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="step3_desc">
+          Run AI & OpenCV inspection to get document-wise analysis before submitting on official government portals.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div data-i18n="footer_title">Digital Document Verification Assistant</div>
+      <div data-i18n="footer_sub">Preliminary Application Readiness Check</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

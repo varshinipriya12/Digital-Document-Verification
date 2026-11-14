@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works - Digital Document Verification</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">Preliminary Application Readiness Check</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="how-it-works.html" class="active" data-i18n="nav_how_it_works">How It Works</a></li>
+        <li id="nav-auth-container"></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <span><strong data-i18n="disclaimer_label">DISCLAIMER:</strong> <span data-i18n="disclaimer_text">This is a preliminary document-readiness check. It does not confirm legal authenticity or official government approval.</span></span>
+  </div>
+
+  <main class="main-container">
+    <div style="margin-bottom: 2.5rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <span class="hero-badge" data-i18n="how_badge">System Architecture & Workflow</span>
+      <h1 style="font-size: 2.3rem; margin-top: 6px;" data-i18n="how_title">How Verification Works</h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem;" data-i18n="how_sub">
+        Understand how OpenCV image processing, Tesseract OCR, and Google Gemini AI work together to ensure your documents are ready before submission.
+      </p>
+    </div>
+
+    <!-- 10 Step Detailed List -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); padding: 2.5rem; box-shadow: var(--shadow-sm); max-width: 900px; margin: 0 auto 3rem;">
+      <ol style="display: flex; flex-direction: column; gap: 1.5rem; padding-left: 1.5rem;">
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step1_t">1. Create an Account or Sign In</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step1_d">Sign in using email credentials or Google OAuth to secure your verification sessions.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step2_t">2. Select Government Document Verification</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step2_d">Select the unified Government Document Verification service supporting Aadhaar, PAN, Income, Caste, Residence, Birth Certificate, Passport, and Marksheets.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step3_t">3. View Required Documents</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step3_d">Dynamically fetch official document requirements stored in MongoDB.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step4_t">4. Upload Documents</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step4_d">Upload PDF, JPG, or PNG files (up to 8 MB per file). Files are securely stored with random UUIDs.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step5_t">5. OpenCV Document Quality Inspection</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step5_d">OpenCV calculates Laplacian variance for blur detection, mean brightness, resolution, and blank image checks.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step6_t">6. OCR Text Extraction</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step6_d">PyTesseract performs image thresholding and extracts readable text snippets for evidence matching.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step7_t">7. Gemini AI Document-Type & Content Verification</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step7_d">Google Gemini AI checks whether the uploaded file actually matches the required document type.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step8_t">8. Receive Document-Wise Results</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step8_d">Get itemized status badges (READY, NEEDS ATTENTION, INVALID, MISSING) with confidence scores.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step9_t">9. Review Final Verification Report</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step9_d">Inspect overall session status and actionable recommendations if any document needs attention.</p>
+        </li>
+        <li>
+          <h4 style="font-size: 1.1rem; color: var(--primary);" data-i18n="how_step10_t">10. Continue to Official Government Portal</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;" data-i18n="how_step10_d">Once all documents pass as READY, click through to the official portal to complete your official application.</p>
+        </li>
+      </ol>
+
+      <div style="background-color: var(--accent-saffron-light); border: 1px solid var(--accent-saffron-border); padding: 1.25rem; border-radius: var(--border-radius-sm); font-size: 0.9rem; color: #78350F; margin-top: 2rem;">
+        <strong data-i18n="disclaimer_label">📢 Note:</strong> <span data-i18n="disclaimer_text">This application provides preliminary document-readiness checks and does not replace official government verification.</span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div data-i18n="footer_title">Digital Document Verification Assistant</div>
+      <div data-i18n="footer_sub">Preliminary Verification Workflow</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+venv/
+*.pyc
+__pycache__/
+backend/uploads/*
+!backend/uploads/.gitkeep
+.env
+.DS_Store
+backend/data/db.json

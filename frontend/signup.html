@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - Digital Document Verification</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+</head>
+<body style="background-color: #F8FAFC; min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Top Bar -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">Preliminary Application Readiness Check</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="login.html" data-i18n="nav_signin">Sign In</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 2.5rem 1rem;">
+    <div class="auth-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; width: 100%; max-width: 460px; padding: 2.5rem; box-shadow: 0 15px 30px -5px rgba(15, 23, 42, 0.08);">
+      
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="width: 56px; height: 56px; background: rgba(15, 23, 42, 0.05); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
+        </div>
+        <h2 style="font-size: 1.5rem; font-weight: 700; color: #0F172A; margin: 0;" data-i18n="nav_signup">Create an Account</h2>
+        <p style="color: #64748B; font-size: 0.88rem; margin-top: 6px;">
+          Register to save and manage your document verification sessions
+        </p>
+      </div>
+
+      <div id="signup-alert" style="display: none;"></div>
+
+      <form id="signup-form">
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="name" style="font-weight: 600; color: #334155; font-size: 0.88rem; margin-bottom: 6px; display: block;" data-i18n="lbl_name">Full Name</label>
+          <input type="text" id="name" class="form-input" placeholder="Rahul Sharma" style="width: 100%; padding: 11px 14px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 0.95rem; outline: none; transition: all 0.2s;" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="email" style="font-weight: 600; color: #334155; font-size: 0.88rem; margin-bottom: 6px; display: block;" data-i18n="lbl_email">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="rahul@example.com" style="width: 100%; padding: 11px 14px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 0.95rem; outline: none; transition: all 0.2s;" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="password" style="font-weight: 600; color: #334155; font-size: 0.88rem; margin-bottom: 6px; display: block;" data-i18n="lbl_password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" class="form-input password-input-styled" placeholder="Create strong password" style="width: 100%; padding: 11px 44px 11px 14px; border: 1px solid #BAE6FD; background-color: #F0F9FF; border-radius: 10px; font-size: 0.95rem; outline: none; transition: all 0.2s;" required>
+            <button type="button" class="password-toggle-btn" title="Show password" aria-label="Show password" onclick="togglePasswordVisibility('password', this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+            </button>
+          </div>
+
+          <!-- Real-Time Password Strength Meter & Checklist Container -->
+          <div id="password-strength-container" style="margin-top: 10px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; display: none;">
+            <!-- Strength Bar & Status Message -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span id="password-strength-title" style="font-size: 0.82rem; font-weight: 700; color: #475569;">Password Strength</span>
+              <span id="password-strength-badge" style="font-size: 0.78rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: #FEE2E2; color: #DC2626;">Weak Password</span>
+            </div>
+            
+            <div style="height: 6px; width: 100%; background: #E2E8F0; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+              <div id="password-strength-bar" style="height: 100%; width: 20%; background: #DC2626; border-radius: 3px; transition: width 0.25s ease, background-color 0.25s ease;"></div>
+            </div>
+
+            <div id="password-strength-message" style="font-size: 0.82rem; font-weight: 600; color: #DC2626; margin-bottom: 10px;">
+              Weak Password – Password does not meet the requirements.
+            </div>
+
+            <!-- Real-Time Requirements Checklist -->
+            <div style="font-size: 0.8rem; font-weight: 700; color: #334155; margin-bottom: 6px; border-top: 1px solid #EDF2F7; padding-top: 8px;">
+              Password Requirements:
+            </div>
+            <ul id="password-criteria-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; display: flex; flex-direction: column; gap: 5px;">
+              <li id="rule-length" class="criteria-item unfulfilled" style="display: flex; align-items: center; gap: 8px; color: #64748B;">
+                <span class="criteria-icon" style="font-weight: 700; font-size: 0.95rem; color: #94A3B8;">✗</span>
+                <span class="criteria-label">At least 8 characters</span>
+              </li>
+              <li id="rule-uppercase" class="criteria-item unfulfilled" style="display: flex; align-items: center; gap: 8px; color: #64748B;">
+                <span class="criteria-icon" style="font-weight: 700; font-size: 0.95rem; color: #94A3B8;">✗</span>
+                <span class="criteria-label">One uppercase letter (A–Z)</span>
+              </li>
+              <li id="rule-lowercase" class="criteria-item unfulfilled" style="display: flex; align-items: center; gap: 8px; color: #64748B;">
+                <span class="criteria-icon" style="font-weight: 700; font-size: 0.95rem; color: #94A3B8;">✗</span>
+                <span class="criteria-label">One lowercase letter (a–z)</span>
+              </li>
+              <li id="rule-number" class="criteria-item unfulfilled" style="display: flex; align-items: center; gap: 8px; color: #64748B;">
+                <span class="criteria-icon" style="font-weight: 700; font-size: 0.95rem; color: #94A3B8;">✗</span>
+                <span class="criteria-label">One number (0–9)</span>
+              </li>
+              <li id="rule-special" class="criteria-item unfulfilled" style="display: flex; align-items: center; gap: 8px; color: #64748B;">
+                <span class="criteria-icon" style="font-weight: 700; font-size: 0.95rem; color: #94A3B8;">✗</span>
+                <span class="criteria-label">One special character (@, #, $, %, &, !, etc.)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-label" for="confirm_password" style="font-weight: 600; color: #334155; font-size: 0.88rem; margin-bottom: 6px; display: block;" data-i18n="lbl_confirm_password">Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirm_password" class="form-input password-input-styled" placeholder="Repeat password" style="width: 100%; padding: 11px 44px 11px 14px; border: 1px solid #BAE6FD; background-color: #F0F9FF; border-radius: 10px; font-size: 0.95rem; outline: none; transition: all 0.2s;" required>
+            <button type="button" class="password-toggle-btn" title="Show password" aria-label="Show password" onclick="togglePasswordVisibility('confirm_password', this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+            </button>
+          </div>
+          <div id="confirm-password-match-msg" style="display: none; font-size: 0.82rem; margin-top: 6px; font-weight: 600;"></div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="signup-submit-btn" style="width: 100%; justify-content: center; padding: 12px; font-size: 0.98rem; font-weight: 700; border-radius: 10px;">
+          <span data-i18n="nav_signup">Create Account</span> &rarr;
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid #F1F5F9; font-size: 0.88rem; color: #64748B;">
+        <span data-i18n="already_account">Already have an account?</span> <a href="login.html" style="font-weight: 700; color: var(--primary); text-decoration: none;" data-i18n="nav_signin">Sign In</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div data-i18n="footer_title">Digital Document Verification for Government Services</div>
+      <div data-i18n="footer_sub">Preliminary Verification Assistant</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

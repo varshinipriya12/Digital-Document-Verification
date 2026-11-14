@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - Digital Document Verification</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">User Profile & Account Settings</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="my-verifications.html" data-i18n="nav_my_verifications">My Verifications</a></li>
+        <li id="nav-auth-container"></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <span><strong data-i18n="disclaimer_label">DISCLAIMER:</strong> <span data-i18n="disclaimer_text">This is a preliminary document-readiness check. It does not confirm legal authenticity or official government approval.</span></span>
+  </div>
+
+  <main class="main-container">
+    <div style="margin-bottom: 2rem;">
+      <span class="hero-badge">Account Settings</span>
+      <h1 style="font-size: 2.2rem; margin-top: 6px;">User Profile & Security</h1>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">
+        Manage your personal account details, view verification statistics, and update security credentials.
+      </p>
+    </div>
+
+    <div id="profile-container">
+      <div style="text-align: center; padding: 3rem;">Loading profile details...</div>
+    </div>
+  </main>
+
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div data-i18n="footer_title">Digital Document Verification Assistant</div>
+      <div data-i18n="footer_sub">User Account Management</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

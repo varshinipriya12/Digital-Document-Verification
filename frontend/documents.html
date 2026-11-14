@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Required Documents - Digital Document Verification</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">Preliminary Application Readiness Check</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="how-it-works.html" data-i18n="nav_how_it_works">How It Works</a></li>
+        <li id="nav-auth-container"></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <span><strong data-i18n="disclaimer_label">DISCLAIMER:</strong> <span data-i18n="disclaimer_text">This is a preliminary document-readiness check. It does not confirm legal authenticity or official government approval.</span></span>
+  </div>
+
+  <main class="main-container">
+    <div style="margin-bottom: 1.5rem;">
+      <a href="services.html" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">&larr; Back to Services</a>
+      <h1 id="service-title" style="font-size: 2.2rem; margin-top: 8px;">Government Document Verification</h1>
+      <p style="color: var(--text-muted); font-size: 1.02rem;" data-i18n="upload_page_sub">
+        Upload clear copies of the government documents you wish to verify. You can upload one or multiple documents in this verification session. Document types and quality will be checked by AI during verification.
+      </p>
+    </div>
+
+    <!-- Service Search Bar with Dropdown & Application Options (Exact Same Position) -->
+    <div class="service-selection-section" id="service-selection-section">
+      <div class="service-search-bar-wrapper">
+        <label for="service-search-input" class="service-search-label">
+          <span style="font-weight: 700; font-size: 0.95rem; color: var(--accent-navy);">🏛️ Select Government Service:</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Choose one of the 8 services to view required documents</span>
+        </label>
+        
+        <div class="search-input-container">
+          <span class="search-input-icon">🔍</span>
+          <input 
+            type="text" 
+            id="service-search-input" 
+            class="service-search-input" 
+            placeholder="Search or select a Government Service..." 
+            autocomplete="off"
+            aria-label="Search or select a Government Service"
+            aria-expanded="false"
+          >
+          <button 
+            type="button" 
+            id="btn-clear-service" 
+            class="service-clear-btn" 
+            title="Clear Selected Service and Restore Categories"
+            aria-label="Clear Selected Service"
+            onclick="clearServiceSelection()"
+            style="display: none;"
+          >✕</button>
+          <button 
+            type="button" 
+            id="btn-toggle-service-dropdown" 
+            class="service-dropdown-btn" 
+            title="Open Government Services List"
+            aria-label="Toggle Government Services Dropdown"
+          >
+            <span id="dropdown-arrow-icon" class="dropdown-arrow">▼</span>
+          </button>
+
+          <!-- Dropdown menu of the 8 services -->
+          <ul id="service-dropdown-menu" class="service-dropdown-menu" style="display: none;" role="listbox">
+            <!-- Dynamically populated and filtered -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Application Type Options: New Application / Update -->
+      <div id="application-type-bar" class="application-type-bar">
+        <div class="app-type-controls" id="app-type-controls" style="display: none;">
+          <span class="app-type-label">Application Option:</span>
+          <div class="app-type-buttons" id="app-type-buttons">
+            <button type="button" class="app-type-btn active" id="btn-type-new" onclick="selectApplicationType('new')">
+              <span class="pill-dot">🌟</span> New Application
+            </button>
+            <button type="button" class="app-type-btn" id="btn-type-update" onclick="selectApplicationType('update')">
+              <span class="pill-dot">🔄</span> Update / Correction
+            </button>
+          </div>
+        </div>
+
+        <div class="active-service-status-pill" id="active-service-status-pill">
+          <span class="active-service-name" id="active-service-text">All Government Document Categories</span>
+          <span class="doc-counter-badge" id="upload-counter">📂 0 of 18 Documents Uploaded</span>
+        </div>
+      </div>
+
+      <!-- Secondary Sub-Operation Bar (Registration Type / Update Details / Form 8 / Ration Card Op) -->
+      <div id="sub-operation-bar" class="sub-operation-bar" style="display: none;">
+        <div class="sub-op-controls">
+          <span class="sub-op-label" id="sub-op-label">Select Option:</span>
+          <div class="sub-op-buttons" id="sub-op-buttons">
+            <!-- Populated dynamically based on service and application type -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Cards Grid loaded dynamically by uploads.js -->
+    <div class="upload-cards-grid" id="upload-cards-grid">
+      <!-- Upload cards populated here -->
+    </div>
+
+    <!-- Action Bar -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.75rem; border-radius: var(--border-radius-lg); text-align: center; margin-top: 2rem;">
+      <h3 style="margin-bottom: 0.5rem;" data-i18n="upload_ready_heading">Ready to Verify Your Uploaded Documents?</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;" data-i18n="upload_ready_sub">
+        Click below to run OpenCV quality inspection, OCR text extraction, and Gemini AI document matching.
+      </p>
+      <button class="btn-primary" id="btn-start-verification" style="font-size: 1.1rem; padding: 1rem 2.5rem; justify-content: center; margin: 0 auto;">
+        <span data-i18n="btn_start_verification">⚡ Start Document Verification →</span>
+      </button>
+    </div>
+  </main>
+
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div data-i18n="footer_title">Digital Document Verification Assistant</div>
+      <div data-i18n="footer_sub">Preliminary Application Readiness Check</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/uploads.js"></script>
+</body>
+</html>

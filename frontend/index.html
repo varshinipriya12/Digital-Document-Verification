@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Document Verification for Government Services</title>
+  <meta name="description" content="Preliminary document-readiness assistant for Indian government service applications using OpenCV, OCR, and Google Gemini AI.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar with Language Selector -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">Preliminary Application Readiness Check</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="active" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="how-it-works.html" data-i18n="nav_how_it_works">How It Works</a></li>
+        <li id="nav-auth-container">
+          <!-- Populated by auth.js -->
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <span><strong data-i18n="disclaimer_label">DISCLAIMER:</strong> <span data-i18n="disclaimer_text">This is a preliminary document-readiness check. It does not confirm legal authenticity or official government approval.</span></span>
+  </div>
+
+  <!-- Main Hero Content -->
+  <main class="main-container">
+    <section class="hero-section">
+      <h1 class="hero-title" data-i18n="hero_title">Prepare Your Documents Before You Apply</h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
+        Select a government service, upload your required documents, and verify whether your documents are clear, complete, and correct before applying on the official portal.
+      </p>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="services.html" class="btn-primary" id="select-service-hero-btn" data-i18n="btn_select_service">
+          Start Document Verification &rarr;
+        </a>
+        <a href="how-it-works.html" class="btn-secondary" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.3);" data-i18n="btn_how_it_works">
+          How Verification Works
+        </a>
+      </div>
+    </section>
+
+    <!-- 3 Step Workflow -->
+    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;" data-i18n="steps_heading">Simple 3-Step Verification Process</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-title" data-i18n="step1_title">1. Select Government Service</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="step1_desc">
+          Choose from Income Certificate, Caste Certificate, Residence Certificate, Scholarships, Birth Certificates, and more.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-title" data-i18n="step2_title">2. Upload Required Documents</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="step2_desc">
+          Upload Aadhaar, Address Proof, Income Proof, Passbooks, or Marksheets in PDF, JPG, or PNG format.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-title" data-i18n="step3_title">3. Verify & Get Report</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="step3_desc">
+          OpenCV checks image clarity/blur, OCR extracts text, and Gemini AI verifies document-type matching before official submission.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div>
+        <h4 style="color: white; margin-bottom: 4px;" data-i18n="footer_title">Digital Document Verification Assistant</h4>
+        <p style="font-size: 0.82rem;" data-i18n="footer_sub">Preliminary Document-Readiness Tool for Government Applications</p>
+      </div>
+      <div>
+        <p style="font-size: 0.82rem;">Developed for College Project & Demonstration Purposes</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

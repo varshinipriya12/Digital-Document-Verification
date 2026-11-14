@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Digital Document Verification</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+</head>
+<body style="background-color: #F8FAFC; min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Top Bar -->
+  <div class="gov-top-bar">
+    <span data-i18n="portal_title">🏛️ Official Public Digital Document Verification Portal</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span data-i18n="sub_portal">Preliminary Application Readiness Check</span>
+      <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.svg" alt="Official Seal Logo" class="gov-seal-logo">
+        <div class="brand-title">
+          <span class="main-name" data-i18n="brand_main">DIGITAL DOC VERIFY</span>
+          <span class="sub-name" data-i18n="brand_sub">Government Services Assistant</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+        <li><a href="signup.html" class="btn-nav-accent" data-i18n="nav_signup">Sign Up</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 2.5rem 1rem;">
+    <div class="auth-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; width: 100%; max-width: 440px; padding: 2.5rem; box-shadow: 0 15px 30px -5px rgba(15, 23, 42, 0.08);">
+      
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="width: 56px; height: 56px; background: rgba(15, 23, 42, 0.05); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2 style="font-size: 1.5rem; font-weight: 700; color: #0F172A; margin: 0;" data-i18n="nav_signin">Sign In to Your Account</h2>
+        <p style="color: #64748B; font-size: 0.88rem; margin-top: 6px;">
+          Enter your email and password to access your verification dashboard
+        </p>
+      </div>
+
+      <div id="login-alert" style="display: none;"></div>
+
+      <!-- Credentials Form -->
+      <form id="login-form">
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="email" style="font-weight: 600; color: #334155; font-size: 0.88rem; margin-bottom: 6px; display: block;" data-i18n="lbl_email">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="name@example.com" style="width: 100%; padding: 11px 14px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 0.95rem; outline: none; transition: all 0.2s;" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label class="form-label" for="password" style="font-weight: 600; color: #334155; font-size: 0.88rem;" data-i18n="lbl_password">Password</label>
+            <a href="#" id="open-forgot-modal" style="font-size: 0.83rem; color: var(--primary); font-weight: 600; text-decoration: none;" data-i18n="forgot_password_link">Forgot Password?</a>
+          </div>
+          <div class="password-wrapper">
+            <input type="password" id="password" class="form-input password-input-styled" placeholder="••••••••" style="width: 100%; padding: 11px 44px 11px 14px; border: 1px solid #BAE6FD; background-color: #F0F9FF; border-radius: 10px; font-size: 0.95rem; outline: none; transition: all 0.2s;" required>
+            <button type="button" class="password-toggle-btn" title="Show password" aria-label="Show password" onclick="togglePasswordVisibility('password', this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="login-submit-btn" style="width: 100%; justify-content: center; padding: 12px; font-size: 0.98rem; font-weight: 700; border-radius: 10px;">
+          <span data-i18n="nav_signin">Sign In</span> &rarr;
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid #F1F5F9; font-size: 0.88rem; color: #64748B;">
+        <span data-i18n="no_account">Don't have an account?</span> <a href="signup.html" style="font-weight: 700; color: var(--primary); text-decoration: none;" data-i18n="nav_signup">Sign Up</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Forgot Password / OTP Verification Modal -->
+  <div id="forgot-modal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem;">
+    <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; max-width: 440px; width: 100%; padding: 2rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15); position: relative;">
+      
+      <!-- Close Button -->
+      <button type="button" id="close-forgot-modal" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.25rem; color: #64748B; cursor: pointer;">✕</button>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="font-size: 2.2rem; margin-bottom: 0.25rem;">🔑</div>
+        <h3 data-i18n="forgot_title" style="margin: 0; font-size: 1.3rem; color: #0F172A;">Reset Your Password</h3>
+        <p data-i18n="forgot_sub" style="color: #64748B; font-size: 0.85rem; margin-top: 4px;">
+          Verify your email address using a 6-digit OTP code
+        </p>
+      </div>
+
+      <div id="forgot-alert" style="display: none; margin-bottom: 1rem;"></div>
+
+      <!-- Step 1: Enter Registered Email -->
+      <div id="forgot-step-1">
+        <div class="form-group">
+          <label class="form-label" for="forgot-email" data-i18n="lbl_email">Email Address</label>
+          <input type="email" id="forgot-email" class="form-input" placeholder="name@example.com" style="width: 100%; padding: 11px 14px; border: 1px solid #CBD5E1; border-radius: 10px;" required>
+        </div>
+        <button type="button" id="btn-request-otp" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 11px; border-radius: 10px;">
+          <span data-i18n="btn_send_otp">Send OTP →</span>
+        </button>
+      </div>
+
+      <!-- Step 2: Enter 6-Digit OTP -->
+      <div id="forgot-step-2" style="display: none;">
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 0.75rem; font-size: 0.82rem; color: #64748B; margin-bottom: 1rem; text-align: center;">
+          📩 An OTP code was sent to <strong id="sent-otp-email" style="color: #0F172A;">your email</strong>. Valid for <span id="otp-timer" style="font-weight: 700; color: #D97706;">10:00</span> mins.
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="forgot-otp" data-i18n="lbl_otp">6-Digit OTP Code</label>
+          <input type="text" id="forgot-otp" class="form-input" placeholder="123456" maxlength="6" style="text-align: center; letter-spacing: 4px; font-size: 1.2rem; font-weight: 700; border-radius: 10px;" required>
+        </div>
+        <button type="button" id="btn-verify-otp" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 11px; border-radius: 10px;">
+          <span data-i18n="btn_verify_otp">Verify OTP →</span>
+        </button>
+        <div style="text-align: center; margin-top: 0.75rem;">
+          <button type="button" id="btn-resend-otp" style="background: none; border: none; font-size: 0.82rem; color: var(--primary); cursor: pointer; text-decoration: underline;">Resend OTP</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Enter New Password -->
+      <div id="forgot-step-3" style="display: none;">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="forgot-new-password" data-i18n="lbl_new_password">New Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="forgot-new-password" class="form-input password-input-styled" placeholder="••••••••" minlength="8" style="width: 100%; padding: 11px 44px 11px 14px; border: 1px solid #BAE6FD; background-color: #F0F9FF; border-radius: 10px;" required>
+            <button type="button" class="password-toggle-btn" title="Show password" aria-label="Show password" onclick="togglePasswordVisibility('forgot-new-password', this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="forgot-confirm-password" data-i18n="lbl_confirm_password">Confirm New Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="forgot-confirm-password" class="form-input password-input-styled" placeholder="••••••••" style="width: 100%; padding: 11px 44px 11px 14px; border: 1px solid #BAE6FD; background-color: #F0F9FF; border-radius: 10px;" required>
+            <button type="button" class="password-toggle-btn" title="Show password" aria-label="Show password" onclick="togglePasswordVisibility('forgot-confirm-password', this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+            </button>
+          </div>
+        </div>
+        <button type="button" id="btn-submit-reset" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 11px; border-radius: 10px;">
+          <span data-i18n="btn_reset_password">Reset Password →</span>
+        </button>
+      </div>
+
+      <!-- Step 4: Success Message -->
+      <div id="forgot-step-4" style="display: none; text-align: center; padding: 1rem 0;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
+        <h4 style="margin: 0 0 0.5rem 0; color: #166534;">Password Reset Successful!</h4>
+        <p style="color: #64748B; font-size: 0.88rem; margin-bottom: 1.5rem;">
+          Your password has been updated. You can now log in using your new password.
+        </p>
+        <button type="button" id="btn-forgot-done" class="btn-primary" style="width: 100%; justify-content: center; padding: 11px; border-radius: 10px;">
+          Return to Sign In →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="gov-footer">
+    <div class="footer-container">
+      <div data-i18n="footer_title">Digital Document Verification for Government Services</div>
+      <div data-i18n="footer_sub">Preliminary Verification Assistant</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
